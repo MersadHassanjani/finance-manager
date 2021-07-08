@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +10,60 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+/* @import url('../assets/fonts/iransans.ttf') */
+
+/* base styles */
+
+* {
+  margin: 0;
+  font-family: "Quicksand";
+  color: #333;
+}
+
+.ltr {
+  direction: ltr;
+}
+
+.rtl {
+  direction: rtl;
+}
+
+.farsi {
+  font-family: "iransans";
+  src: url('./fonts/iransans.ttf');
+  font-style: normal;
+}
+
+/* .farsiyek {
+  font-family: "byekan";
+  src: url('./fonts/BYekan.ttf');
+  font-style: normal;
+} */
+
+.farsiest {
+  font-family: "estedad";
+  src: url('./fonts/Estedad/Estedad-Medium.ttf');
+  /* font-style: normal; */
+}
+
+.farsiestb {
+  font-family: "estedad";
+  src: url('./fonts/Estedad/Estedad-Black.ttf');
+  font-style: bold;
+  font-weight: 900;
+}
+
+.tr {
+  text-align: right !important
+}
+
+.tl {
+  text-align: left !important
+}
+
+.tc {
+  text-align: center !important
 }

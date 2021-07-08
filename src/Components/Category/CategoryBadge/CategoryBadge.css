@@ -1,0 +1,12 @@
+.category-badge {
+    border-radius: 1.7rem;
+    padding: 0.5rem 0.8rem;
+    margin: 0.3rem 0.3rem;
+    transition: 0.4s;
+}
+
+.category-badge:hover {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    transition: 0.4s;
+}

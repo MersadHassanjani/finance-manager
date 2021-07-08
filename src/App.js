@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import "./zephyr.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// import "bootstrap/dist/css/bootstrap.css";
+import Navbar from "./Components/Navbar/Navbar";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import Wallets from "./Components/Wallets/Wallets";
+import NotFound from "./Components/NotFound/NotFound";
+import CategoryPage from "./Components/Category/CategoryPage";
 
 function App() {
+  // const subtitle = "Your financial best friend!";
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App" style={{ height: "100vh", maxHeight: "100vh" }}>
+        <Navbar />
+        <Switch>
+          <Route exact path="/">
+            <Dashboard />
+          </Route>
+          <Route exact path="/wallets">
+            <Wallets />
+          </Route>
+          <Route exact path="/categories">
+            <CategoryPage />
+          </Route>
+          <Route>
+            {/* 404 */}
+            <NotFound />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

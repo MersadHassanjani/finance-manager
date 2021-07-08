@@ -1,0 +1,8 @@
+.nav-fixed {
+    position: fixed;
+    width: 100%;
+}
+
+.nav-border {
+    border-bottom: 3px solid orange;
+}
