@@ -118,7 +118,7 @@ const Navbar = ({ logggedstate, logoutFunction }) => {
             </li>
             <li className="nav-item">
               <Link
-                className="nav-link farsi"
+                className="nav-link disabled farsi"
                 to="/categories"
                 onClick={() => setBurgerDropdown(false)}
               >
@@ -127,7 +127,7 @@ const Navbar = ({ logggedstate, logoutFunction }) => {
             </li>
             <li className="nav-item">
               <Link
-                className="nav-link farsi"
+                className="nav-link disabled farsi"
                 to="/settings"
                 onClick={() => setBurgerDropdown(false)}
               >

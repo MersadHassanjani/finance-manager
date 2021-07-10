@@ -1,64 +1,137 @@
 // import "./Wallets.css";
+import TransactionListItem from "../TransactionList/TransactionListItem";
+import TransactionList from "../TransactionList/TransactionList";
+import WalletListItem from "../WalletList/WalletListItem";
+import WalletList from "../WalletList/WalletList";
 
 const Wallets = () => {
   const lis = [
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    11,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1,
   ];
   return (
     <div className="Wallet">
-      {lis.map((item) => (
+      {/* <TransactionListItem
+        itemKey="11"
+        itemType="-"
+        itemAmount="1000"
+        itemDate="7/10/2021"
+        itemDescription="dadam be mammad"
+        itemCategoryList={[
+          { title: "newtag", color: "white", background_color: "#36a832" },
+          { title: "ag", color: "white", background_color: "red" },
+          { title: "nil", background_color: "yellow" },
+        ]}
+      /> */}
+      {/* <WalletListItem itemKey="11" itemName="yoyowallet" itemColor="red" /> */}
+      <WalletList
+        items={[
+          {
+            itemKey: "11",
+            itemName: "کیف صادرات",
+            itemColor: "lightblue",
+            itemDate: "7/10/2021",
+          },
+          {
+            itemKey: "12",
+            itemName: "کیف تجارت",
+            itemColor: "yellow",
+            itemDate: "7/10/2021",
+          },
+          {
+            itemKey: "14",
+            itemName: "کیف ثامن",
+            itemColor: "blueviolet",
+            itemDate: "7/10/2021",
+          },
+          {
+            itemKey: "15",
+            itemName: "کیف ملت",
+            itemColor: "crimson",
+            itemDate: "7/10/2021",
+          },
+        ]}
+      />
+      {/* <TransactionList
+        items={[
+          {
+            itemKey: "11",
+            itemType: "-",
+            itemAmount: "1000",
+            itemDate: "7/10/2021",
+            itemDescription: "dadam be mammad",
+            itemCategoryList: [
+              { title: "newtag", color: "white", background_color: "#36a832" },
+              { title: "ag", color: "white", background_color: "red" },
+              { title: "nil", background_color: "yellow" },
+            ],
+          },
+          {
+            itemKey: "11",
+            itemType: "-",
+            itemAmount: "1000",
+            itemDate: "7/10/2021",
+            itemDescription: "dadam be mammad",
+            itemCategoryList: [
+              { title: "newtag", color: "white", background_color: "#36a832" },
+              { title: "ag", color: "white", background_color: "red" },
+              { title: "nil", background_color: "yellow" },
+            ],
+          },
+          {
+            itemKey: "11",
+            itemType: "-",
+            itemAmount: "1000",
+            itemDate: "7/10/2021",
+            itemDescription: "dadam be mammad",
+            itemCategoryList: [
+              { title: "newtag", color: "white", background_color: "#36a832" },
+              { title: "ag", color: "white", background_color: "red" },
+              { title: "nil", background_color: "yellow" },
+            ],
+          },
+          {
+            itemKey: "11",
+            itemType: "-",
+            itemAmount: "1000",
+            itemDate: "7/10/2021",
+            itemDescription: "dadam be mammad",
+            itemCategoryList: [
+              { title: "newtag", color: "white", background_color: "#36a832" },
+              { title: "ag", color: "white", background_color: "red" },
+              { title: "nil", background_color: "yellow" },
+            ],
+          },
+          {
+            itemKey: "11",
+            itemType: "-",
+            itemAmount: "1000",
+            itemDate: "7/10/2021",
+            itemDescription: "dadam be mammad",
+            itemCategoryList: [
+              { title: "newtag", color: "white", background_color: "#36a832" },
+              { title: "ag", color: "white", background_color: "red" },
+              { title: "nil", background_color: "yellow" },
+            ],
+          },
+          {
+            itemKey: "11",
+            itemType: "-",
+            itemAmount: "1000",
+            itemDate: "7/10/2021",
+            itemDescription: "dadam be mammad",
+            itemCategoryList: [
+              { title: "newtag", color: "white", background_color: "#36a832" },
+              { title: "ag", color: "white", background_color: "red" },
+              { title: "nil", background_color: "yellow" },
+            ],
+          },
+        ]}
+      /> */}
+      {/* {lis.map((item) => (
         <h2>List of wallets</h2>
-      ))}
+      ))} */}
     </div>
   );
 };

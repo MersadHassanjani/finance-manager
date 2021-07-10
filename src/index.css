@@ -67,3 +67,7 @@ code {
 .tc {
   text-align: center !important
 }
+
+.borderless {
+  border: 0 none !important;
+}

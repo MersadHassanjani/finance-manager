@@ -1,0 +1,7 @@
+#TransactionList .TransactionList-container {}
+
+#TransactionList {
+    width: clamp(50%, 80vw, 95%);
+    margin: auto;
+    list-style: none;
+}

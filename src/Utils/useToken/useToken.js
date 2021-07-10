@@ -1,4 +1,5 @@
 import { useState } from "react";
+// import { atom, useRecoilState } from "recoil";
 
 export default function useToken() {
   const getToken = () => {
@@ -6,15 +7,15 @@ export default function useToken() {
     const userToken = JSON.parse(tokenString);
     return userToken?.token;
   };
-
   const [token, setToken] = useState(getToken() || "");
+
   // const [hasToken, setHasToken] = useState(token.length() ? true : false);
 
   const saveToken = (userToken) => {
-    // localStorage.setItem("fm-token", JSON.stringify(userToken));
-    // setToken(userToken.token);
     localStorage.setItem("fm-token", JSON.stringify(userToken));
     setToken(userToken);
+    // localStorage.setItem("fm-token", JSON.stringify(userToken));
+    // setToken(userToken.token);
     // console.log(
     //   "useToken_ setting token to:",
     //   userToken,

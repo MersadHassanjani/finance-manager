@@ -1,0 +1,25 @@
+#WalletListItem-id .WalletListItem-container {
+    height: auto;
+    /* border-top: 2px solid rgba(255, 166, 0, 0.5); */
+    /* border-bottom: 2px solid rgba(255, 166, 0, 0.5); */
+    border: 2px solid rgba(255, 166, 0, 0.5);
+    border-radius: 0.8rem;
+    /* background: rgba(0, 0, 0, 0.02); */
+    /* background: linear-gradient(45deg, #33ccff 0%, rgba(0, 0, 0, 0.02) 40%); */
+}
+
+#WalletListItem-id .WalletListItem-date {
+    border-radius: 0.5rem;
+    /* background: azure; */
+    color: chocolate;
+}
+
+.WalletListItem-Name {
+    /* -webkit-text-stroke-width: 0.4px;
+    -webkit-text-stroke-color: orange; */
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 166, 0, 0.2);
+    text-decoration-thickness: 0.4rem;
+    color: #212529;
+    cursor: pointer;
+}

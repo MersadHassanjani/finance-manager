@@ -1,0 +1,28 @@
+#TransactionListItem-id .TransactionListItem-container {
+    height: auto;
+    /* border-top: 2px solid rgba(255, 166, 0, 0.5); */
+    /* border-bottom: 2px solid rgba(255, 166, 0, 0.5); */
+    border: 2px solid rgba(255, 166, 0, 0.5);
+    border-radius: 0.8rem;
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.itemAmountGreen {
+    background: green;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    color: MediumSpringGreen;
+}
+
+.itemAmountRed {
+    background: red;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    color: Cornsilk;
+}
+
+#TransactionListItem-id .TransactionListItem-date {
+    border-radius: 0.5rem;
+    /* background: azure; */
+    color: chocolate;
+}
