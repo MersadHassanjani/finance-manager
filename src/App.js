@@ -25,41 +25,45 @@ function App() {
     <Router>
       <div className="App" style={{ height: "100vh", maxHeight: "100vh" }}>
         <Navbar logggedstate={!!token} logoutFunction={() => setToken("")} />
+        {!token && <Login setLoginStatus={(result) => setToken(result)} />}
+        <button
+          onClick={() => {
+            console.log(`token state before manual login: ${!!token}`);
+            setToken("token3");
+            console.log(`token state after manual login: ${!!token}`);
+          }}
+        >
+          {" "}
+          click to log in
+        </button>
+        <button
+          onClick={() => {
+            console.log(`token state before manual login: ${!!token}`);
+            setToken("");
+            console.log(`token state after manual login: ${!!token}`);
+          }}
+        >
+          {" "}
+          click to log out
+        </button>
+
+        {token && <Dashboard />}
+        {!token && <Login setLoginStatus={(result) => setToken(result)} />}
+
         <Switch>
           <Route exact path="/">
-            <button
-              onClick={() => {
-                console.log(`token state before manual login: ${!!token}`);
-                setToken("token3");
-                console.log(`token state after manual login: ${!!token}`);
-              }}
-            >
-              {" "}
-              click to log in
-            </button>
-            <button
-              onClick={() => {
-                console.log(`token state before manual login: ${!!token}`);
-                setToken("");
-                console.log(`token state after manual login: ${!!token}`);
-              }}
-            >
-              {" "}
-              click to log out
-            </button>
-
             {token && <Dashboard />}
-            {!token && <Login setLoginStatus={(result) => setToken(result)} />}
+            {/* {!token && <Login setLoginStatus={(result) => setToken(result)} />} */}
           </Route>
 
           <Route exact path="/wallets">
             {token && <Wallets />}
-            {!token && <Login setLoginStatus={(result) => setToken(result)} />}
+            {/* {!token && <Login setLoginStatus={(result) => setToken(result)} />} */}
           </Route>
 
           <Route exact path="/categories">
             {token && <CategoryPage />}
-            {!token && <Login setLoginStatus={(result) => setToken(result)} />}
+            {/* {!token && <Login setLoginStatus={(result) => setToken(result)} />} */}
           </Route>
 
           <Route>
