@@ -12,6 +12,7 @@ import NotFound from "./Components/NotFound/NotFound";
 import CategoryPage from "./Components/Category/CategoryPage";
 import Login from "./Components/Login/Login";
 import useToken from "./Utils/useToken/useToken";
+import TransactionEditor from "./Components/TransactionEditor/TransactionEditor";
 
 function App() {
   const { token, setToken } = useToken();
@@ -47,6 +48,11 @@ function App() {
         <Switch>
           <Route exact path="/">
             {token && <Dashboard />}
+            {/* {!token && <Login setLoginStatus={(result) => setToken(result)} />} */}
+          </Route>
+
+          <Route exact path="/txe">
+            {token && <TransactionEditor />}
             {/* {!token && <Login setLoginStatus={(result) => setToken(result)} />} */}
           </Route>
 

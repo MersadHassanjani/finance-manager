@@ -28,6 +28,42 @@ const TransactionList = () => {
         itemType: "-",
         itemAmount: "1000",
         itemDate: "7/10/2021",
+        itemTime: "10:48",
+        itemDescription:
+          "dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad ",
+        itemCategoryList: [
+          {
+            title: "newtag",
+            color: "white",
+            background_color: "#36a832",
+          },
+          { title: "ag", color: "white", background_color: "red" },
+          { title: "nil", background_color: "yellow" },
+        ],
+      },
+      {
+        itemKey: "11",
+        itemType: "-",
+        itemAmount: "900",
+        itemDate: "7/10/2021",
+        itemTime: "10:48",
+        itemDescription: "dadam be mammad",
+        itemCategoryList: [
+          {
+            title: "newtag",
+            color: "white",
+            background_color: "#36a832",
+          },
+          { title: "ag", color: "white", background_color: "red" },
+          { title: "nil", background_color: "yellow" },
+        ],
+      },
+      {
+        itemKey: "11",
+        itemType: "+",
+        itemAmount: "1250",
+        itemDate: "7/10/2021",
+        itemTime: "10:48",
         itemDescription: "dadam be mammad",
         itemCategoryList: [
           {
@@ -42,8 +78,26 @@ const TransactionList = () => {
       {
         itemKey: "11",
         itemType: "-",
-        itemAmount: "1000",
+        itemAmount: "850",
         itemDate: "7/10/2021",
+        itemTime: "10:48",
+        itemDescription: "dadam be mammad",
+        itemCategoryList: [
+          {
+            title: "newtag",
+            color: "white",
+            background_color: "#36a832",
+          },
+          { title: "ag", color: "white", background_color: "red" },
+          { title: "nil", background_color: "yellow" },
+        ],
+      },
+      {
+        itemKey: "11",
+        itemType: "+",
+        itemAmount: "5000",
+        itemDate: "7/10/2021",
+        itemTime: "10:48",
         itemDescription: "dadam be mammad",
         itemCategoryList: [
           {
@@ -58,56 +112,9 @@ const TransactionList = () => {
       {
         itemKey: "11",
         itemType: "-",
-        itemAmount: "1000",
+        itemAmount: "1300",
         itemDate: "7/10/2021",
-        itemDescription: "dadam be mammad",
-        itemCategoryList: [
-          {
-            title: "newtag",
-            color: "white",
-            background_color: "#36a832",
-          },
-          { title: "ag", color: "white", background_color: "red" },
-          { title: "nil", background_color: "yellow" },
-        ],
-      },
-      {
-        itemKey: "11",
-        itemType: "-",
-        itemAmount: "1000",
-        itemDate: "7/10/2021",
-        itemDescription: "dadam be mammad",
-        itemCategoryList: [
-          {
-            title: "newtag",
-            color: "white",
-            background_color: "#36a832",
-          },
-          { title: "ag", color: "white", background_color: "red" },
-          { title: "nil", background_color: "yellow" },
-        ],
-      },
-      {
-        itemKey: "11",
-        itemType: "-",
-        itemAmount: "1000",
-        itemDate: "7/10/2021",
-        itemDescription: "dadam be mammad",
-        itemCategoryList: [
-          {
-            title: "newtag",
-            color: "white",
-            background_color: "#36a832",
-          },
-          { title: "ag", color: "white", background_color: "red" },
-          { title: "nil", background_color: "yellow" },
-        ],
-      },
-      {
-        itemKey: "11",
-        itemType: "-",
-        itemAmount: "1000",
-        itemDate: "7/10/2021",
+        itemTime: "10:48",
         itemDescription: "dadam be mammad",
         itemCategoryList: [
           {
@@ -131,7 +138,7 @@ const TransactionList = () => {
       id="TransactionList"
       className="list-group mt-3 mb-5 TransactionList-container borderless px-2 py-2"
     >
-      <h1>{walletId}</h1>
+      {/* <h1>{walletId}</h1> */}
       {items &&
         items.map((item) => (
           <TransactionListItem
@@ -139,6 +146,7 @@ const TransactionList = () => {
             itemType={item.itemType}
             itemAmount={item.itemAmount}
             itemDate={item.itemDate}
+            itemTime={item.itemTime}
             itemDescription={item.itemDescription}
             itemCategoryList={item.itemCategoryList}
           />

@@ -1,10 +1,14 @@
 import "./TransactionListItem.css";
 import CategoryBadge from "../Category/CategoryBadge/CategoryBadge";
+import { BiEdit } from "react-icons/bi";
+import { MdDelete } from "react-icons/md";
+import { IconContext } from "react-icons";
 const TransactionListItem = ({
   itemKey,
   itemType,
   itemAmount,
   itemDate,
+  itemTime,
   itemDescription,
   itemCategoryList,
 }) => {
@@ -24,31 +28,44 @@ const TransactionListItem = ({
       </div> */}
 
       <div className="list-group-item list-group-item-action flex-column align-items-start TransactionListItem-container">
-        <div className="container">
-          <div className="row">
-            <div className="col-1">
-              <div className="column justify-items-between">
-                <div>Edit</div>
-                <div>Remove</div>
-              </div>
+        <div className="container-fluid">
+          <div className="row align-items-center">
+            <div className="col-1 h-100 justify-content-between ">
+              <IconContext.Provider
+                value={{ color: "blue", size: "30px" }}
+                className="TransactionListItem-txBtn"
+              >
+                <div className="TransactionListItem-txBtn">
+                  <BiEdit />
+                </div>
+                <div className="TransactionListItem-txBtn">
+                  <MdDelete />
+                </div>
+              </IconContext.Provider>
             </div>
-            <div className="col-11">
-              <div className="d-flex w-100 justify-content-between ">
-                <h2
-                  className={`mb-1 ${
-                    itemType === "+" ? "itemAmountGreen" : "itemAmountRed"
-                  }`}
-                >
-                  {itemType}
-                  {itemAmount}
-                </h2>
-                {/* <small className="text-muted">{itemDate}</small> */}
-                <h4 className="px-2 py-2 TransactionListItem-date">
-                  {itemDate}
-                </h4>
-              </div>
+
+            <div className="col-1"></div>
+
+            <div className="col-2 h-100 TransactionListItem-midColumn">
+              <h2
+                className={`mb-1 ${
+                  itemType === "+" ? "itemAmountGreen" : "itemAmountRed"
+                }`}
+              >
+                {itemType}
+                {itemAmount}
+              </h2>
+              <h5 className=" px-2 py-2 mx-auto my-auto TransactionListItem-datetime">
+                {itemDate}
+              </h5>
+              <h5 className=" px-2 py-2 mx-auto my-auto TransactionListItem-datetime">
+                {itemTime}
+              </h5>
+            </div>
+
+            <div className="col-8">
+              {" "}
               <h4 className="mb-4">{itemDescription}</h4>
-              {/* <small className="text-muted">{}</small> */}
               <div className="mt-4">
                 {itemCategoryList.map((cat) => (
                   <CategoryBadge

@@ -21,8 +21,27 @@
     color: Cornsilk;
 }
 
-#TransactionListItem-id .TransactionListItem-date {
+#TransactionListItem-id .TransactionListItem-datetime {
     border-radius: 0.5rem;
     /* background: azure; */
     color: chocolate;
+    overflow: auto;
+}
+
+#TransactionListItem-id .TransactionListItem-txBtn {
+    /* background-color: chocolate; */
+    width: 100%;
+    height: 100%;
+    padding: 1.4rem;
+    cursor: pointer;
+}
+
+#TransactionListItem-id .TransactionListItem-midColumn {
+    /* background-color: rgba(255, 166, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.05); */
+    background: linear-gradient(45deg, rgba(255, 166, 0, 0.4) 0%, rgba(0, 0, 0, 0.02) 90%);
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.02), rgba(255, 166, 0, 0.07));
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 166, 0, 0.15)
 }

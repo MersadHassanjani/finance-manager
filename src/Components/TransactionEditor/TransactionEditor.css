@@ -1,0 +1,83 @@
+.TransactionEditor-container {
+    border: 1px solid orange;
+    border-radius: 1rem;
+    height: clamp(50vh, 80vh, 90vh);
+    height: auto;
+    width: clamp(50vw, 80vw, 90vw);
+    color: red;
+    background-color: rgba(255, 166, 0, 0.01);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.TransactionEditor-form {
+    text-align: center;
+    border: 1px black solid;
+    border-radius: 4px;
+    width: clamp(25%, 25rem, 80%);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    height: clamp(50vh, 65vh, 80vh);
+    height: auto;
+    padding: 2.5rem;
+    padding-top: 0.5rem;
+}
+
+.TransactionEditor-formInputGroup {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.TransactionEditor-formInputGroup>label {
+    margin-top: 0.5rem;
+    margin-bottom: 1.0rem;
+}
+
+.TransactionEditor-Label {}
+
+.TransactionEditor-Btn {
+    margin-top: 3.5rem;
+    margin-bottom: 1.0rem;
+    border: 3px solid white;
+    border-radius: 0.5rem;
+    margin-bottom: auto;
+}
+
+.TransactionEditor-Btn:hover {
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    background-color: orange;
+    color: black;
+}
+
+.TransactionEditor-form-control:focus {
+    /* border-color: #167bff; */
+    border-color: orange;
+    box-shadow: none;
+}
+
+h3 {
+    text-align: center;
+    margin: 0;
+    line-height: 1;
+    padding-bottom: 20px;
+}
+
+.TransactionEditor-H3 {
+    /* margin-top: 0.5rem; */
+    margin-bottom: 2.5rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    /* border-top: 2px solid rgba(255, 166, 0, 0.5); */
+    border-bottom: 2px solid rgba(255, 166, 0, 0.5);
+    border-radius: 0.25rem;
+    background-color: rgba(0, 0, 0, 0.02);
+    /* text-decoration: underline; */
+}
+
+.TransactionEditor-H1 {
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+}
