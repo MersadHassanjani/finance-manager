@@ -5,6 +5,7 @@
     border: 2px solid rgba(255, 166, 0, 0.5);
     border-radius: 0.8rem;
     background: rgba(0, 0, 0, 0.02);
+    background: rgba(0, 0, 0, 0.035);
 }
 
 .itemAmountGreen {
@@ -36,12 +37,26 @@
     cursor: pointer;
 }
 
+#TransactionListItem-id .TransactionListItem-txBtnGroup {
+    /* background-color: chocolate; */
+    border-right: 2px solid #dee2e6;
+    /* padding-right: 2.5rem; */
+}
+
 #TransactionListItem-id .TransactionListItem-midColumn {
     /* background-color: rgba(255, 166, 0, 0.1);
     background-color: rgba(0, 0, 0, 0.05); */
     background: linear-gradient(45deg, rgba(255, 166, 0, 0.4) 0%, rgba(0, 0, 0, 0.02) 90%);
     background: radial-gradient(circle, rgba(0, 0, 0, 0.02), rgba(255, 166, 0, 0.07));
     padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 166, 0, 0.15)
+}
+
+.TransactionListItem-confirm-custom-ui {
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.02), rgba(255, 166, 0, 0.07));
+    background: rgba(255, 166, 0, 0.4);
+    padding: 2rem;
     border-radius: 0.5rem;
     border: 1px solid rgba(255, 166, 0, 0.15)
 }

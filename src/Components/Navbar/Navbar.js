@@ -156,7 +156,7 @@ const Navbar = ({ logggedstate, logoutFunction }) => {
                 >
                   <div className={`dropdown-menu ${dropdown1 ? "show" : ""}`}>
                     <a
-                      className="dropdown-item farsiest tr"
+                      className="dropdown-item disabled farsiest tr"
                       href="/user-account"
                       onClick={() => setBurgerDropdown(false)}
                     >
@@ -165,12 +165,12 @@ const Navbar = ({ logggedstate, logoutFunction }) => {
                     <div className="dropdown-divider"></div>
                     <a
                       className="dropdown-item farsiest tr"
-                      href="/"
+                      href="#"
                       onClick={() => {
                         setBurgerDropdown(false);
                         setTimeout(() => {
                           logoutFunction();
-                        }, 5);
+                        }, 100);
                       }}
                     >
                       خروج از سیستم

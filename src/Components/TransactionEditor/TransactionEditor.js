@@ -1,7 +1,91 @@
 import "./TransactionEditor.css";
+import { Redirect, useHistory } from "react-router-dom";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import getToken from "../../Utils/GetToken";
+import { BiFastForwardCircle } from "react-icons/bi";
 const TransactionEditor = () => {
+  const { trxid: trxId, wallid: wallId } = useParams();
+  const history = useHistory();
+
   const [trxType, setTrxType] = useState("");
+  const [amount, setAmount] = useState(0);
+  const [desc, setDesc] = useState("");
+  const [year, setYear] = useState(0);
+  const [month, setMonth] = useState(0);
+  const [day, setDay] = useState(0);
+  const [hour, setHour] = useState(-1);
+  const [minute, setMinute] = useState(-1);
+
+  const handleSubmit = () => {
+    let lis = [];
+    let err = false;
+    if (year < 1) {
+      lis.push("Year must be positive. \n");
+      err = true;
+    }
+    if (month > 12 || month < 1) {
+      lis.push("Month must be between 1 and 12. \n");
+      err = true;
+    }
+    if (day > 31 || day < 1) {
+      lis.push("Day must be between 1 and 31. \n");
+      err = true;
+    }
+    if (hour > 23 || hour < 0) {
+      lis.push("Hour must be between 0 and 23. \n");
+      err = true;
+    }
+    if (minute > 59 || minute < 0) {
+      lis.push("Minute must be between 0 and 59. \n");
+      err = true;
+    }
+    if (!desc) {
+      lis.push("Description cannot be empty. \n");
+      err = true;
+    }
+    if (err) {
+      alert(`Bad input! \n ${lis}`);
+      return false;
+    }
+
+    // If valid inputs
+
+    const axios = require("axios");
+    const token = getToken();
+    if (trxId === "new") {
+      try {
+        axios.post("localhost:5000/transactions/addtrx", {
+          AUTH_TOKEN: token,
+          trxId: trxId,
+          trxdate: `${month}/${day}/${year}T${hour}:${minute}`,
+          trxtype: trxType,
+          amount,
+          description: desc,
+          walletid: wallId,
+          catlist: [],
+        });
+      } catch (err) {
+        console.log(`TrxAdd error:\n${err}`);
+      }
+    } else {
+      try {
+        axios.post("localhost:5000/transactions/ثیهفtrx", {
+          AUTH_TOKEN: token,
+          trxId: trxId,
+          trxdate: `${month}/${day}/${year}T${hour}:${minute}`,
+          trxtype: trxType,
+          amount,
+          description: desc,
+          walletid: wallId,
+          catlist: [],
+        });
+      } catch (err) {
+        console.log(`Trxٍیهف error:\n${err}`);
+      }
+      return true;
+    }
+  };
   return (
     <div
       id="TransactionEditor"
@@ -23,6 +107,7 @@ const TransactionEditor = () => {
                 setTimeout(() => {
                   console.log(trxType);
                 }, 500);
+                setAmount(parseInt(e.target.value));
               }}
               placeholder="مبلغ تراکنش را وارد کنید"
             />
@@ -54,6 +139,7 @@ const TransactionEditor = () => {
           <div className="form-group TransactionEditor-formInputGroup">
             <label className="TransactionEditor-Label farsiest">توضیحات</label>
             <textarea
+              onChange={(e) => setDesc(e.target.value)}
               className="form-control farsiest tc"
               placeholder="توضیحات را وارد کنید"
             />
@@ -70,6 +156,7 @@ const TransactionEditor = () => {
                   className=" form-control farsiest tc"
                   min="1"
                   max="31"
+                  onChange={(e) => setDay(parseInt(e.target.value))}
                   placeholder="روز"
                 />
               </div>
@@ -78,6 +165,7 @@ const TransactionEditor = () => {
                   type="number"
                   min="1"
                   max="12"
+                  onChange={(e) => setMonth(parseInt(e.target.value))}
                   className=" form-control farsiest tc"
                   placeholder="ماه"
                 />
@@ -86,6 +174,7 @@ const TransactionEditor = () => {
                 <input
                   type="number"
                   min="1970"
+                  onChange={(e) => setYear(parseInt(e.target.value))}
                   className=" form-control farsiest tc"
                   placeholder="سال"
                 />
@@ -103,6 +192,7 @@ const TransactionEditor = () => {
                   type="number"
                   min="0"
                   max="59"
+                  onChange={(e) => setMinute(parseInt(e.target.value))}
                   className=" form-control farsiest tc"
                   placeholder="دقیقه"
                 />
@@ -112,6 +202,7 @@ const TransactionEditor = () => {
                   type="number"
                   min="0"
                   max="23"
+                  onChange={(e) => setHour(parseInt(e.target.value))}
                   className=" form-control farsiest tc"
                   placeholder="ساعت"
                 />
@@ -126,6 +217,7 @@ const TransactionEditor = () => {
           mx-3 "
             onClick={(e) => {
               e.preventDefault();
+              if (handleSubmit()) history.goBack();
             }}
           >
             ثبت
@@ -137,6 +229,7 @@ const TransactionEditor = () => {
           mx-3"
             onClick={(e) => {
               e.preventDefault();
+              history.goBack();
             }}
           >
             انصراف

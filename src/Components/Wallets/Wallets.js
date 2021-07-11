@@ -25,34 +25,37 @@ const Wallets = () => {
         ]}
       /> */}
       {/* <WalletListItem itemKey="11" itemName="yoyowallet" itemColor="red" /> */}
+      {<h1 className="WalletList-H1 farsiestb">مدیریت کیف پول</h1>}
+
       <WalletList
         items={[
           {
-            itemKey: "11",
+            itemKey: "1",
             itemName: "کیف صادرات",
             itemColor: "lightblue",
             itemDate: "7/10/2021",
           },
           {
-            itemKey: "12",
+            itemKey: "2",
             itemName: "کیف تجارت",
             itemColor: "yellow",
             itemDate: "7/10/2021",
           },
           {
-            itemKey: "14",
+            itemKey: "3",
             itemName: "کیف ثامن",
             itemColor: "blueviolet",
             itemDate: "7/10/2021",
           },
           {
-            itemKey: "15",
+            itemKey: "4",
             itemName: "کیف ملت",
             itemColor: "crimson",
             itemDate: "7/10/2021",
           },
         ]}
       />
+      <div className="pt-5"> </div>
       {/* <TransactionList
         items={[
           {

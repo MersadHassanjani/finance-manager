@@ -1,8 +1,16 @@
+import { Redirect, useHistory } from "react-router-dom";
+import { useCallback } from "react";
 import "./TransactionListItem.css";
 import CategoryBadge from "../Category/CategoryBadge/CategoryBadge";
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { IconContext } from "react-icons";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+// import useToken from "../../Utils/useToken/useToken";
+import getToken from "../../Utils/GetToken";
+
+// import TransactionEditor from "../TransactionEditor/TransactionEditor";
 const TransactionListItem = ({
   itemKey,
   itemType,
@@ -11,7 +19,66 @@ const TransactionListItem = ({
   itemTime,
   itemDescription,
   itemCategoryList,
+  itemWalletId,
+  parentrerender: forcerer,
 }) => {
+  const axios = require("axios");
+  const history = useHistory();
+
+  const handleEditClick = useCallback(
+    () => history.push(`/txe/${itemWalletId}/${itemKey}`),
+    [history]
+  );
+
+  const token = getToken();
+  const handleDeleteOperation = () => {
+    try {
+      axios.post("localhost:5000/transactions/deletetrx", {
+        AUTH_TOKEN: token,
+        trxId: { itemKey },
+      });
+    } catch (err) {
+      console.log(`TrxDelete error:\n${err}`);
+    }
+  };
+  const handleDeleteClick = () => {
+    // console.log("fffffffffffffffff");
+    confirmAlert({
+      title: "Confirm Transaction Deletion",
+      message: "Are you sure to delete this transaction?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => alert("Click Yes"),
+        },
+        {
+          label: "No",
+          onClick: () => alert("Click No"),
+        },
+      ],
+      customUI: ({ onClose }) => {
+        return (
+          <div className="TransactionListItem-confirm-custom-ui">
+            <h1 className="farsiest">حذف تراکنش</h1>
+            <p className="farsiest">تراکنش حذف شود؟</p>
+            <button className="farsiest btn" onClick={onClose}>
+              انصراف
+            </button>
+            <button
+              className="farsiest btn btn-danger"
+              onClick={() => {
+                handleDeleteOperation();
+                setTimeout(() => forcerer(), 200);
+                onClose();
+              }}
+            >
+              حذف تراکنش
+            </button>
+          </div>
+        );
+      },
+    });
+  };
   return (
     <li key={itemKey} id="TransactionListItem-id" className="ltr my-2">
       {/* <div className="WalletListItem-container">
@@ -30,15 +97,21 @@ const TransactionListItem = ({
       <div className="list-group-item list-group-item-action flex-column align-items-start TransactionListItem-container">
         <div className="container-fluid">
           <div className="row align-items-center">
-            <div className="col-1 h-100 justify-content-between ">
+            <div className="col-1 h-100 justify-content-between TransactionListItem-txBtnGroup">
               <IconContext.Provider
                 value={{ color: "blue", size: "30px" }}
                 className="TransactionListItem-txBtn"
               >
-                <div className="TransactionListItem-txBtn">
+                <div
+                  className="TransactionListItem-txBtn"
+                  onClick={handleEditClick}
+                >
                   <BiEdit />
                 </div>
-                <div className="TransactionListItem-txBtn">
+                <div
+                  className="TransactionListItem-txBtn"
+                  onClick={handleDeleteClick}
+                >
                   <MdDelete />
                 </div>
               </IconContext.Provider>

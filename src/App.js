@@ -16,32 +16,37 @@ import TransactionEditor from "./Components/TransactionEditor/TransactionEditor"
 
 function App() {
   const { token, setToken } = useToken();
+  const debugging = false;
 
   return (
     <Router>
       <div className="App" style={{ height: "100vh", maxHeight: "100vh" }}>
         <Navbar logggedstate={!!token} logoutFunction={() => setToken("")} />
         {/* {!token && <Login setLoginStatus={(result) => setToken(result)} />} */}
-        <button
-          onClick={() => {
-            console.log(`token state before manual login: ${!!token}`);
-            setToken("token3");
-            console.log(`token state after manual login: ${!!token}`);
-          }}
-        >
-          {" "}
-          click to log in
-        </button>
-        <button
-          onClick={() => {
-            console.log(`token state before manual login: ${!!token}`);
-            setToken("");
-            console.log(`token state after manual login: ${!!token}`);
-          }}
-        >
-          {" "}
-          click to log out
-        </button>
+        {debugging && (
+          <button
+            onClick={() => {
+              console.log(`token state before manual login: ${!!token}`);
+              setToken("token3");
+              console.log(`token state after manual login: ${!!token}`);
+            }}
+          >
+            {" "}
+            click to log in
+          </button>
+        )}
+        {debugging && (
+          <button
+            onClick={() => {
+              console.log(`token state before manual login: ${!!token}`);
+              setToken("");
+              console.log(`token state after manual login: ${!!token}`);
+            }}
+          >
+            {" "}
+            click to log out
+          </button>
+        )}
 
         {!token && <Login setLoginStatus={(result) => setToken(result)} />}
 
@@ -51,7 +56,7 @@ function App() {
             {/* {!token && <Login setLoginStatus={(result) => setToken(result)} />} */}
           </Route>
 
-          <Route exact path="/txe">
+          <Route exact path="/txe/:wallid/:trxid">
             {token && <TransactionEditor />}
             {/* {!token && <Login setLoginStatus={(result) => setToken(result)} />} */}
           </Route>
