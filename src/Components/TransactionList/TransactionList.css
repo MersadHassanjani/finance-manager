@@ -9,3 +9,12 @@
 .TransactionList-newBtn {
     background-color: rgba(255, 166, 0.3);
 }
+
+.TransactionList-H1 {
+    background-color: rgba(255, 166, 0.1);
+    border-radius: 0.5rem;
+    color: rgba(0, 0, 0, 0.65);
+    width: 30%;
+    align-items: center;
+    padding: 1rem;
+}

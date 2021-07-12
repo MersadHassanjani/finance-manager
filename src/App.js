@@ -13,11 +13,12 @@ import CategoryPage from "./Components/Category/CategoryPage";
 import Login from "./Components/Login/Login";
 import useToken from "./Utils/useToken/useToken";
 import TransactionEditor from "./Components/TransactionEditor/TransactionEditor";
+import TransactionAdder from "./Components/TransactionAdder/TransactionAdder";
 
 function App() {
+  // localStorage.clear();
   const { token, setToken } = useToken();
   const debugging = false;
-
   return (
     <Router>
       <div className="App" style={{ height: "100vh", maxHeight: "100vh" }}>
@@ -58,6 +59,11 @@ function App() {
 
           <Route exact path="/txe/:wallid/:trxid">
             {token && <TransactionEditor />}
+            {/* {!token && <Login setLoginStatus={(result) => setToken(result)} />} */}
+          </Route>
+
+          <Route exact path="/txa/:wallid">
+            {token && <TransactionAdder />}
             {/* {!token && <Login setLoginStatus={(result) => setToken(result)} />} */}
           </Route>
 

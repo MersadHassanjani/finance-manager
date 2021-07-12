@@ -3,6 +3,7 @@ import "./Navbar2.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import OutClicked from "../../Utils/OutClicked/OutClicked";
+import axios from "axios";
 
 // const NavbarLegacy = () => {
 //   return (
@@ -169,6 +170,11 @@ const Navbar = ({ logggedstate, logoutFunction }) => {
                       onClick={() => {
                         setBurgerDropdown(false);
                         setTimeout(() => {
+                          try {
+                            axios.post("http://localhost:5000/logout");
+                          } catch (err) {
+                            console.log(err);
+                          }
                           logoutFunction();
                         }, 100);
                       }}

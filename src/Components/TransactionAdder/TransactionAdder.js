@@ -1,85 +1,14 @@
-import "./TransactionEditor.css";
+import "./TransactionAdder.css";
 import { Redirect, useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import getToken from "../../Utils/GetToken";
-import { useCallback } from "react";
 import { BiFastForwardCircle } from "react-icons/bi";
 const TransactionEditor = () => {
-  const { trxid: trxId, wallid: wallId } = useParams();
+  const { wallid: wallId } = useParams();
   const history = useHistory();
-
   const axios = require("axios");
   const [filled, setFilled] = useState(false);
-  const getTrxData = async () => {
-    const token = getToken();
-    // walletId already hast az params
-    let ret = [];
-    try {
-      const msgBody = {
-        token,
-        walletid: wallId,
-      };
-      console.log(`Reqed with ${JSON.stringify(msgBody)}`);
-      const result = await axios.post(
-        `http://localhost:5000/transactions/gettrx`,
-        msgBody
-      );
-      console.log("_fetchTransactions result: \t" + JSON.stringify(result));
-      ret = result.data["transactions"];
-      console.log("_fetchTransactions rettt: \t" + JSON.stringify(ret));
-    } catch (err) {
-      console.log(`Error Fetching transactions: ${err}`);
-    }
-    /*
-format
-newtrx {"trxid":1,"amount":"999","trxtype":"+","walletid":1,"description":"desc001","trxdate":"7/12/2021T00:48"}
-*/
-    // return ret;
-    if (ret)
-      ret = ret.map(
-        ({ trxid, amount, trxtype, walletid, description, trxdate }) => {
-          let newTrx = {
-            itemKey: trxid,
-            itemAmount: amount,
-            itemType: trxtype,
-            itemWalletId: walletid,
-            itemDescription: description,
-            itemCategoryList: [],
-          };
-          console.log(`newtrx ${JSON.stringify(newTrx)}`);
-          const dt = trxdate.split("T");
-          newTrx["itemDate"] = dt[0];
-          newTrx["itemTime"] = dt[1];
-          newTrx["itemCategoryList"] = [];
-          return newTrx;
-        }
-      );
-    console.log("_fetchTransactions end rettt1: \t" + JSON.stringify(ret));
-    ret = ret.filter(
-      (element) => element.itemKey == trxId && element.itemWalletId == wallId
-    );
-    console.log("_fetchTransactions end rettt2: \t" + JSON.stringify(ret));
-    return ret[0];
-  };
-
-  const handleGoBack = useCallback(
-    () => history.push(`/wallets/${wallId}`),
-    [history]
-  );
-
-  console.log(`tttttttt`);
-  let trxData;
-
-  getTrxData().then((res) => {
-    trxData = { ...res };
-    trxData = Object.assign(res);
-    console.log(`\n\n\nresres ${JSON.stringify(res)}`);
-    console.log(`\n\n\n trxData innn ${JSON.stringify(trxData)}`);
-  });
-  console.log(
-    `\n\n\n\ntrxData: ${JSON.stringify(trxData)} \n type: ${typeof trxData}`
-  );
 
   const [trxType, setTrxType] = useState("+");
   const [amount, setAmount] = useState(0);
@@ -89,23 +18,6 @@ newtrx {"trxid":1,"amount":"999","trxtype":"+","walletid":1,"description":"desc0
   const [day, setDay] = useState(0);
   const [hour, setHour] = useState(-1);
   const [minute, setMinute] = useState(-1);
-
-  setTimeout(() => {
-    if (!filled) {
-      console.log("ggffg");
-      const trxD = trxData["itemDate"].split("/");
-      const trxT = trxData["itemTime"].split(":");
-      setTrxType(trxData.itemType);
-      setAmount(trxData.itemAmount);
-      setDesc(trxData.itemDescription);
-      setYear(trxD[2]);
-      setMonth(trxD[0]);
-      setDay(trxD[1]);
-      setHour(trxT[0]);
-      setMinute(trxT[1]);
-      setFilled(true);
-    }
-  }, 1000);
 
   const handleSubmit = () => {
     let lis = [];
@@ -145,9 +57,8 @@ newtrx {"trxid":1,"amount":"999","trxtype":"+","walletid":1,"description":"desc0
     const token = getToken();
 
     try {
-      axios.post("http://localhost:5000/transactions/edittrx", {
+      axios.post("http://localhost:5000/transactions/addtrx", {
         token,
-        trxid: trxId,
         trxdate: `${month}/${day}/${year}T${hour}:${minute}`,
         trxtype: trxType,
         amount: amount > 0 ? amount : amount * -1,
@@ -155,10 +66,10 @@ newtrx {"trxid":1,"amount":"999","trxtype":"+","walletid":1,"description":"desc0
         walletid: wallId,
         catlist: [],
       });
+      return true;
     } catch (err) {
-      console.log(`TrxEdit error:\n${err}`);
+      console.log(`TrxAdd error:\n${err}`);
     }
-    return true;
   };
   return (
     <div
@@ -183,7 +94,6 @@ newtrx {"trxid":1,"amount":"999","trxtype":"+","walletid":1,"description":"desc0
                 }, 500);
                 setAmount(parseInt(e.target.value));
               }}
-              value={amount}
               placeholder="مبلغ تراکنش را وارد کنید"
             />
           </div>
@@ -216,7 +126,6 @@ newtrx {"trxid":1,"amount":"999","trxtype":"+","walletid":1,"description":"desc0
             <textarea
               onChange={(e) => setDesc(e.target.value)}
               className="form-control farsiest tc"
-              value={desc}
               placeholder="توضیحات را وارد کنید"
             />
           </div>
@@ -232,7 +141,6 @@ newtrx {"trxid":1,"amount":"999","trxtype":"+","walletid":1,"description":"desc0
                   className=" form-control farsiest tc"
                   min="1"
                   max="31"
-                  value={day}
                   onChange={(e) => setDay(parseInt(e.target.value))}
                   placeholder="روز"
                 />
@@ -242,7 +150,6 @@ newtrx {"trxid":1,"amount":"999","trxtype":"+","walletid":1,"description":"desc0
                   type="number"
                   min="1"
                   max="12"
-                  value={month}
                   onChange={(e) => setMonth(parseInt(e.target.value))}
                   className=" form-control farsiest tc"
                   placeholder="ماه"
@@ -252,7 +159,6 @@ newtrx {"trxid":1,"amount":"999","trxtype":"+","walletid":1,"description":"desc0
                 <input
                   type="number"
                   min="1970"
-                  value={year}
                   onChange={(e) => setYear(parseInt(e.target.value))}
                   className=" form-control farsiest tc"
                   placeholder="سال"
@@ -271,7 +177,6 @@ newtrx {"trxid":1,"amount":"999","trxtype":"+","walletid":1,"description":"desc0
                   type="number"
                   min="0"
                   max="59"
-                  value={minute}
                   onChange={(e) => setMinute(parseInt(e.target.value))}
                   className=" form-control farsiest tc"
                   placeholder="دقیقه"
@@ -282,7 +187,6 @@ newtrx {"trxid":1,"amount":"999","trxtype":"+","walletid":1,"description":"desc0
                   type="number"
                   min="0"
                   max="23"
-                  value={hour}
                   onChange={(e) => setHour(parseInt(e.target.value))}
                   className=" form-control farsiest tc"
                   placeholder="ساعت"
@@ -298,8 +202,7 @@ newtrx {"trxid":1,"amount":"999","trxtype":"+","walletid":1,"description":"desc0
           mx-3 "
             onClick={(e) => {
               e.preventDefault();
-              // if (handleSubmit()) history.goBack();
-              if (handleSubmit()) handleGoBack();
+              if (handleSubmit()) history.goBack();
             }}
           >
             ثبت

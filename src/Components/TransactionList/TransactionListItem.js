@@ -21,6 +21,7 @@ const TransactionListItem = ({
   itemCategoryList,
   itemWalletId,
   parentrerender: forcerer,
+  itemDeleteFunction,
 }) => {
   const axios = require("axios");
   const history = useHistory();
@@ -31,16 +32,16 @@ const TransactionListItem = ({
   );
 
   const token = getToken();
-  const handleDeleteOperation = () => {
-    try {
-      axios.post("localhost:5000/transactions/deletetrx", {
-        AUTH_TOKEN: token,
-        trxId: { itemKey },
-      });
-    } catch (err) {
-      console.log(`TrxDelete error:\n${err}`);
-    }
-  };
+  // const handleDeleteOperation = () => {
+  //   try {
+  //     axios.post("http://localhost:5000/transactions/deletetrx", {
+  //       token,
+  //       trxid: itemKey,
+  //     });
+  //   } catch (err) {
+  //     console.log(`TrxDelete error:\n${err}`);
+  //   }
+  // };
   const handleDeleteClick = () => {
     // console.log("fffffffffffffffff");
     confirmAlert({
@@ -67,7 +68,7 @@ const TransactionListItem = ({
             <button
               className="farsiest btn btn-danger"
               onClick={() => {
-                handleDeleteOperation();
+                itemDeleteFunction();
                 setTimeout(() => forcerer(), 200);
                 onClose();
               }}
@@ -138,7 +139,7 @@ const TransactionListItem = ({
 
             <div className="col-8">
               {" "}
-              <h4 className="mb-4">{itemDescription}</h4>
+              <h4 className="mb-4 farsi">{itemDescription}</h4>
               <div className="mt-4">
                 {itemCategoryList.map((cat) => (
                   <CategoryBadge

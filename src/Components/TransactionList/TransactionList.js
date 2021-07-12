@@ -13,146 +13,110 @@ const TransactionList = () => {
   const { id: walletId } = useParams();
   const [items, setItems] = useState([]);
   const [rer, setRer] = useState(true);
-  const forcerer = () => setRer(!rer);
+  const [sum, setSum] = useState(0);
+  const [plus, setPlus] = useState(0);
+  const [minus, setMinus] = useState(0);
+  const [value, setValue] = useState(0);
+  const forceUpdate = () => {
+    setValue(value + 1);
+  };
+  const forcerer = () => {
+    console.log(rer + "rrrrrrrrrrrrrrrrrrrrrr");
+    setRer(!rer);
+    console.log(rer + "rrrrrrrrrrrrrrrrrrrrrr");
+    console.log(`walletid ${walletId}`);
+    forceUpdate();
+    console.log(`keys: [${items.forEach((value) => value.itemKey)}]`);
+  };
+  const token = getToken();
+  const handleDeleteOperation = (itemKeyToDelete) => {
+    try {
+      axios.post("http://localhost:5000/transactions/deletetrx", {
+        token,
+        trxid: itemKeyToDelete,
+      });
+      setItems(items.filter((item) => item.itemKey != itemKeyToDelete));
+    } catch (err) {
+      console.log(`TrxDelete error:\n${err}`);
+    }
+  };
 
   const fetchTransactions = async () => {
     const token = getToken();
     // walletId already hast az params
     let ret = [];
     try {
-      const result = await axios.post(`localhost:3333/transactions/gettrx`, {
-        AUTH_TOKEN: token,
-        walletId: walletId,
-      });
+      const msgBody = {
+        token,
+        walletid: walletId,
+      };
+      console.log(`Reqed with ${JSON.stringify(msgBody)}`);
+      const result = await axios.post(
+        `http://localhost:5000/transactions/gettrx`,
+        msgBody
+      );
       console.log("_fetchTransactions result: \t" + result);
-      ret = result.data.json()["transactions"];
+      ret = result.data["transactions"];
+      console.log("_fetchTransactions rettt: \t" + ret);
     } catch (err) {
       console.log(`Error Fetching transactions: ${err}`);
     }
-
-    ret = ret.map((trx) => {
-      let newTrx = { ...trx };
-      const dt = newTrx["itemDate"].split("T");
-      newTrx["itemDate"] = dt[0];
-      newTrx["itemTime"] = dt[1];
-      return newTrx;
-    });
-
-    return [
-      {
-        itemKey: "11",
-        itemType: "-",
-        itemAmount: "1000",
-        itemDate: "7/10/2021",
-        itemTime: "10:48",
-        itemDescription:
-          "dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad dadam be mammad ",
-        itemCategoryList: [
-          {
-            title: "newtag",
-            color: "white",
-            background_color: "#36a832",
-          },
-          { title: "ag", color: "white", background_color: "red" },
-          { title: "nil", background_color: "yellow" },
-        ],
-      },
-      {
-        itemKey: "11",
-        itemType: "-",
-        itemAmount: "900",
-        itemDate: "7/10/2021",
-        itemTime: "10:48",
-        itemDescription: "dadam be mammad",
-        itemCategoryList: [
-          {
-            title: "newtag",
-            color: "white",
-            background_color: "#36a832",
-          },
-          { title: "ag", color: "white", background_color: "red" },
-          { title: "nil", background_color: "yellow" },
-        ],
-      },
-      {
-        itemKey: "11",
-        itemType: "+",
-        itemAmount: "1250",
-        itemDate: "7/10/2021",
-        itemTime: "10:48",
-        itemDescription: "dadam be mammad",
-        itemCategoryList: [
-          {
-            title: "newtag",
-            color: "white",
-            background_color: "#36a832",
-          },
-          { title: "ag", color: "white", background_color: "red" },
-          { title: "nil", background_color: "yellow" },
-        ],
-      },
-      {
-        itemKey: "11",
-        itemType: "-",
-        itemAmount: "850",
-        itemDate: "7/10/2021",
-        itemTime: "10:48",
-        itemDescription: "dadam be mammad",
-        itemCategoryList: [
-          {
-            title: "newtag",
-            color: "white",
-            background_color: "#36a832",
-          },
-          { title: "ag", color: "white", background_color: "red" },
-          { title: "nil", background_color: "yellow" },
-        ],
-      },
-      {
-        itemKey: "11",
-        itemType: "+",
-        itemAmount: "5000",
-        itemDate: "7/10/2021",
-        itemTime: "10:48",
-        itemDescription: "dadam be mammad",
-        itemCategoryList: [
-          {
-            title: "newtag",
-            color: "white",
-            background_color: "#36a832",
-          },
-          { title: "ag", color: "white", background_color: "red" },
-          { title: "nil", background_color: "yellow" },
-        ],
-      },
-      {
-        itemKey: "11",
-        itemType: "-",
-        itemAmount: "1300",
-        itemDate: "7/10/2021",
-        itemTime: "10:48",
-        itemDescription: "dadam be mammad",
-        itemCategoryList: [
-          {
-            title: "newtag",
-            color: "white",
-            background_color: "#36a832",
-          },
-          { title: "ag", color: "white", background_color: "red" },
-          { title: "nil", background_color: "yellow" },
-        ],
-      },
-    ];
+    /*
+format
+newtrx {"trxid":1,"amount":"999","trxtype":"+","walletid":1,"description":"desc001","trxdate":"7/12/2021T00:48"}
+*/
+    // return ret;
+    if (ret)
+      ret = ret.map(
+        ({ trxid, amount, trxtype, walletid, description, trxdate }) => {
+          let newTrx = {
+            itemKey: trxid,
+            itemAmount: amount,
+            itemType: trxtype,
+            itemDescription: description,
+            itemCategoryList: [],
+          };
+          console.log(`newtrx ${JSON.stringify(newTrx)}`);
+          const dt = trxdate.split("T");
+          newTrx["itemDate"] = dt[0];
+          newTrx["itemTime"] = dt[1];
+          newTrx["itemCategoryList"] = [];
+          return newTrx;
+        }
+      );
+    return ret;
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     fetchTransactions().then((res) => setItems(res));
-    console.log("renderrrrr");
+    console.log("TrxList render");
   }, []);
+  useEffect(() => {
+    // setTimeout(() => {
+
+    // }, 500);
+    let s = 0;
+    let p = 0;
+    let m = 0;
+    for (const item of items) {
+      if (item.itemType === "+") {
+        s += parseInt(item.itemAmount);
+        p += 1;
+      }
+      if (item.itemType === "-") {
+        s -= parseInt(item.itemAmount);
+        m += 1;
+      }
+      // console.log(`fhhhh ${item.itemType} ${item.itemAmount}`);
+    }
+    setSum(s);
+    setPlus(p);
+    setMinus(m);
+  }, [items]);
 
   const history = useHistory();
   const handleNewTrx = useCallback(
-    () => history.push(`/txe/${walletId}/new`),
+    () => history.push(`/txa/${walletId}`),
     [history]
   );
 
@@ -164,12 +128,7 @@ const TransactionList = () => {
       {/* <h1>{walletId}</h1> */}
       <div className="container-fluid ">
         <div className="row justify-content-around mb-3">
-          <div
-            className="btn btn-dark farsiest col-4"
-            onClick={() => {
-              forcerer();
-            }}
-          >
+          <div className="btn btn-dark farsiest col-4" onClick={forcerer}>
             به روز رسانی
           </div>
           <div
@@ -181,6 +140,11 @@ const TransactionList = () => {
           >
             افزودن تراکنش جدید
           </div>
+        </div>
+        <div className="row justify-content-around mb-3">
+          <h3 className="TransactionList-H1 farsi">{`موجودی: ${sum}`}</h3>
+          <h3 className="TransactionList-H1 farsi">{`واریزی: ${plus}`}</h3>
+          <h3 className="TransactionList-H1 farsi">{`برداشتی: ${minus}`}</h3>
         </div>
       </div>
       {items &&
@@ -195,8 +159,10 @@ const TransactionList = () => {
             itemDescription={item.itemDescription}
             itemCategoryList={item.itemCategoryList}
             itemWalletId={walletId}
+            itemDeleteFunction={() => handleDeleteOperation(item.itemKey)}
           />
         ))}
+      <h6 style={{ visibility: "hidden" }}>{value}</h6>
     </div>
   );
 };
